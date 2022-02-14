@@ -28,7 +28,7 @@ namespace osu.Game.Tournament.Screens.Drawings.Components
         {
             GroupName = name;
 
-            Size = new Vector2(176, 128);
+            Size = new Vector2(260, 200);
 
             Masking = true;
             CornerRadius = 4;
@@ -71,7 +71,7 @@ namespace osu.Game.Tournament.Screens.Drawings.Components
 
         public void AddTeam(TournamentTeam team)
         {
-            GroupTeam gt = new GroupTeam(team);
+            GroupTeam gt = new GroupTeam(team, 7);
 
             if (TeamsCount < 8)
             {

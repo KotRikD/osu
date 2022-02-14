@@ -105,31 +105,31 @@ namespace osu.Game.Tournament.Screens.Editors
                         {
                             new SettingsTextBox
                             {
-                                LabelText = "Name",
+                                LabelText = "Имя команды",
                                 Width = 0.2f,
                                 Current = Model.FullName
                             },
                             new SettingsTextBox
                             {
-                                LabelText = "Acronym",
+                                LabelText = "Акроним",
                                 Width = 0.2f,
                                 Current = Model.Acronym
                             },
                             new SettingsTextBox
                             {
-                                LabelText = "Flag",
+                                LabelText = "Флаг",
                                 Width = 0.2f,
                                 Current = Model.FlagName
                             },
                             new SettingsTextBox
                             {
-                                LabelText = "Seed",
+                                LabelText = "Сид",
                                 Width = 0.2f,
                                 Current = Model.Seed
                             },
                             new SettingsSlider<int>
                             {
-                                LabelText = "Last Year Placement",
+                                LabelText = "Место после квалов",
                                 Width = 0.33f,
                                 Current = Model.LastYearPlacing
                             },

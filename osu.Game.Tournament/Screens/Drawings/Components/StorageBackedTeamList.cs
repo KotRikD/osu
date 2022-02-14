@@ -55,7 +55,8 @@ namespace osu.Game.Tournament.Screens.Drawings.Components
                             {
                                 FullName = { Value = split[1].Trim(), },
                                 Acronym = { Value = split.Length >= 3 ? split[2].Trim() : null, },
-                                FlagName = { Value = split[0].Trim() }
+                                FlagName = { Value = split[0].Trim() },
+                                QualSeed = { Value = split.Length >= 4 ? split[3].Trim() : null }
                             });
                         }
                     }

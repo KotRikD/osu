@@ -44,9 +44,11 @@ namespace osu.Game.Tournament.Screens.TeamIntro
             if (match.NewValue == null)
                 return;
 
-            const float y_flag_offset = 292;
+            const float y_flag_offset = 190;
 
             const float y_offset = 460;
+
+            int[] avatar_sizes = {240, 240};
 
             mainContainer.Children = new Drawable[]
             {
@@ -54,7 +56,7 @@ namespace osu.Game.Tournament.Screens.TeamIntro
                 {
                     Position = new Vector2(100, 100)
                 },
-                new DrawableTeamFlag(match.NewValue.Team1.Value)
+                new DrawableTeamFlag(match.NewValue.Team1.Value, avatar_sizes)
                 {
                     Position = new Vector2(165, y_flag_offset),
                 },
@@ -62,7 +64,7 @@ namespace osu.Game.Tournament.Screens.TeamIntro
                 {
                     Position = new Vector2(165, y_offset),
                 },
-                new DrawableTeamFlag(match.NewValue.Team2.Value)
+                new DrawableTeamFlag(match.NewValue.Team2.Value, avatar_sizes)
                 {
                     Position = new Vector2(740, y_flag_offset),
                 },

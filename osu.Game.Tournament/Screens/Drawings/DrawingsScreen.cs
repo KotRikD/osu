@@ -6,21 +6,22 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using osu.Framework.Bindables;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Framework.Graphics.Shapes;
-using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.Textures;
+using osu.Framework.Graphics.Shapes;
 using osu.Framework.Logging;
 using osu.Framework.Platform;
 using osu.Game.Graphics;
-using osu.Game.Graphics.Containers;
+using osu.Game.Overlays.Settings;
 using osu.Game.Tournament.Components;
 using osu.Game.Tournament.Models;
 using osu.Game.Tournament.Screens.Drawings.Components;
 using osuTK;
 using osuTK.Graphics;
+using osu.Framework.Extensions.Color4Extensions;
 
 namespace osu.Game.Tournament.Screens.Drawings
 {
@@ -30,6 +31,9 @@ namespace osu.Game.Tournament.Screens.Drawings
 
         private ScrollingTeamContainer teamsContainer;
         private GroupContainer groupsContainer;
+
+        public Bindable<string> QualSeed = new Bindable<string>("Top");
+
         private TournamentSpriteText fullTeamNameText;
 
         private readonly List<TournamentTeam> allTeams = new List<TournamentTeam>();
@@ -53,29 +57,6 @@ namespace osu.Game.Tournament.Screens.Drawings
 
             if (!TeamList.Teams.Any())
             {
-                LinkFlowContainer links;
-
-                InternalChildren = new Drawable[]
-                {
-                    new Box
-                    {
-                        Colour = Color4.Black,
-                        RelativeSizeAxes = Axes.Both,
-                        Anchor = Anchor.Centre,
-                        Origin = Anchor.Centre,
-                        Height = 0.3f,
-                    },
-                    new WarningBox("No drawings.txt file found. Please create one and restart the client."),
-                    links = new LinkFlowContainer
-                    {
-                        Anchor = Anchor.Centre,
-                        Origin = Anchor.Centre,
-                        Y = 60,
-                        AutoSizeAxes = Axes.Both
-                    }
-                };
-
-                links.AddLink("Click for details on the file format", "https://osu.ppy.sh/wiki/en/Tournament_Drawings", t => t.Colour = Color4.White);
                 return;
             }
 
@@ -89,11 +70,12 @@ namespace osu.Game.Tournament.Screens.Drawings
                     RelativeSizeAxes = Axes.Both,
                     Children = new Drawable[]
                     {
-                        new Sprite
+                        new Box
                         {
+                            Anchor = Anchor.TopCentre,
+                            Origin = Anchor.TopCentre,
                             RelativeSizeAxes = Axes.Both,
-                            FillMode = FillMode.Fill,
-                            Texture = textures.Get(@"Backgrounds/Drawings/background.png")
+                            Colour = new Color4(28, 30, 34, 255),
                         },
                         // Visualiser
                         new VisualiserContainer
@@ -178,7 +160,56 @@ namespace osu.Game.Tournament.Screens.Drawings
 
                         Text = "Reset",
                         Action = () => reset()
-                    }
+                    },
+                    new ControlPanel.Spacer(),
+                    new TourneyButton
+                    {
+                        BackgroundColour = Color4Extensions.FromHex("#CC0000"),
+                        RelativeSizeAxes = Axes.X,
+
+                        Text = "Top seed",
+                        Action = () => 
+                        {
+                            changeQualSeed(new Bindable<string>("Top"));
+                            reloadTeams();
+                        }
+                    },
+                    new TourneyButton()
+                    {
+                        BackgroundColour = Color4Extensions.FromHex("#A64D79"),
+                        RelativeSizeAxes = Axes.X,
+
+                        Text = "High seed",
+                        Action = () => 
+                        {
+                            changeQualSeed(new Bindable<string>("High"));
+                            reloadTeams();
+                        }
+                    },
+                    new TourneyButton()
+                    {
+                        BackgroundColour = Color4Extensions.FromHex("#3C78D8"),
+                        RelativeSizeAxes = Axes.X,
+
+                        Text = "Mid seed",
+                        Action = () => 
+                        {
+                            changeQualSeed(new Bindable<string>("Mid"));
+                            reloadTeams();
+                        }
+                    },
+                    new TourneyButton()
+                    {
+                        BackgroundColour = Color4Extensions.FromHex("#D9D9D9"),
+                        RelativeSizeAxes = Axes.X,
+
+                        Text = "Low seed",
+                        Action = () => 
+                        {
+                            changeQualSeed(new Bindable<string>("Low"));
+                            reloadTeams();
+                        }
+                    },
                 }
             };
 
@@ -188,11 +219,16 @@ namespace osu.Game.Tournament.Screens.Drawings
             reset(true);
         }
 
+        private void changeQualSeed(Bindable<string> SeedName)
+        {
+            this.QualSeed = SeedName;
+        }
+
         private void onTeamSelected(TournamentTeam team)
         {
             groupsContainer.AddTeam(team);
 
-            fullTeamNameText.Text = team.FullName.Value;
+            fullTeamNameText.Text = team.Acronym.Value;
             fullTeamNameText.FadeIn(200);
 
             writeResults(groupsContainer.GetStringRepresentation());
@@ -230,6 +266,13 @@ namespace osu.Game.Tournament.Screens.Drawings
                 if (groupsContainer.ContainsTeam(t.FullName.Value))
                     continue;
 
+                // Console.WriteLine(
+                //     t.Acronym + " " + t.QualSeed.ToString() + " " + this.QualSeed.ToString() + " " + (t.QualSeed.ToString().Equals(this.QualSeed.ToString(), StringComparison.OrdinalIgnoreCase)).ToString()
+                // );
+
+                if (!t.QualSeed.ToString().Equals(this.QualSeed.ToString(), StringComparison.OrdinalIgnoreCase))
+                    continue;
+
                 allTeams.Add(t);
                 teamsContainer.AddTeam(t);
             }
@@ -259,7 +302,7 @@ namespace osu.Game.Tournament.Screens.Drawings
                             if (string.IsNullOrEmpty(line))
                                 continue;
 
-                            if (line.ToUpperInvariant().StartsWith("GROUP", StringComparison.Ordinal))
+                            if (line.ToUpperInvariant().StartsWith("GROUP"))
                                 continue;
 
                             // ReSharper disable once AccessToModifiedClosure

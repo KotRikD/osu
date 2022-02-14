@@ -143,7 +143,7 @@ namespace osu.Game.Tournament.Screens.Schedule
                                                                            && Math.Abs(p.Date.Value.DayOfYear - DateTimeOffset.UtcNow.DayOfYear) < 4)
                                                                .OrderByDescending(p => p.Date.Value)
                                                                .Take(8)
-                                                               .Select(p => new ScheduleMatch(p))
+                                                               .Select(p => new ScheduleMatch(p, false))
                                 },
                                 new ScheduleContainer("upcoming matches")
                                 {
@@ -187,7 +187,7 @@ namespace osu.Game.Tournament.Screens.Schedule
                             Anchor = Anchor.CentreLeft,
                             Origin = Anchor.CentreLeft,
                             Text = match.NewValue.Team1.Value?.FullName + " vs " + match.NewValue.Team2.Value?.FullName,
-                            Font = OsuFont.Torus.With(size: 24, weight: FontWeight.SemiBold)
+                            Font = OsuFont.Torus.With(size: 14, weight: FontWeight.SemiBold)
                         },
                         new FillFlowContainer
                         {
@@ -199,7 +199,7 @@ namespace osu.Game.Tournament.Screens.Schedule
                             {
                                 new ScheduleMatchDate(match.NewValue.Date.Value)
                                 {
-                                    Font = OsuFont.Torus.With(size: 24, weight: FontWeight.Regular)
+                                    Font = OsuFont.Torus.With(size: 14, weight: FontWeight.Regular)
                                 }
                             }
                         },

@@ -87,9 +87,11 @@ namespace osu.Game.Tournament.Screens.TeamWin
                 firstDisplay = false;
             }
 
+            var sizes = new int[] {250, 250};
+
             mainContainer.Children = new Drawable[]
             {
-                new DrawableTeamFlag(match.Winner)
+                new DrawableTeamFlag(match.Winner, sizes)
                 {
                     Anchor = Anchor.Centre,
                     Origin = Anchor.Centre,

@@ -22,9 +22,20 @@ namespace osu.Game.Tournament.Components
 
         private Sprite flagSprite;
 
+        private int[] DEFAULT_SIZES = {75, 75};
+
+        private int[] sizes;
+
         public DrawableTeamFlag(TournamentTeam team)
         {
             this.team = team;
+            this.sizes = DEFAULT_SIZES;
+        }
+
+        public DrawableTeamFlag(TournamentTeam team, int[] sizes)
+        {
+            this.team = team;
+            this.sizes = sizes.Length < 2 ? DEFAULT_SIZES : sizes;
         }
 
         [BackgroundDependencyLoader]
@@ -32,7 +43,7 @@ namespace osu.Game.Tournament.Components
         {
             if (team == null) return;
 
-            Size = new Vector2(75, 50);
+            Size = new Vector2(this.sizes[0], this.sizes[1]);
             Masking = true;
             CornerRadius = 5;
             Child = flagSprite = new Sprite

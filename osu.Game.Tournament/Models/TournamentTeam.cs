@@ -29,6 +29,14 @@ namespace osu.Game.Tournament.Models
         /// Short acronym which appears in the group boxes post-selection.
         /// </summary>
         public Bindable<string> Acronym = new Bindable<string>(string.Empty);
+        /// <summary>
+        /// The name of the team qual seed.
+        /// </summary>
+        public Bindable<string> QualSeed = new Bindable<string>(string.Empty);
+        /// <summary>
+        /// The user id.
+        /// </summary>
+        public long UserId;
 
         public BindableList<SeedingResult> SeedingResults = new BindableList<SeedingResult>();
 
