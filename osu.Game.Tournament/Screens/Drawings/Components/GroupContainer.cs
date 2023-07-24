@@ -57,6 +57,7 @@ namespace osu.Game.Tournament.Screens.Drawings.Components
                 groups.Add(g);
                 nextGroupName++;
 
+                // topGroups.Add(g);
                 if (i < (int)MathF.Ceiling(numGroups / 2f))
                     topGroups.Add(g);
                 else

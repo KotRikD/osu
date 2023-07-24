@@ -17,7 +17,7 @@ namespace osu.Game.Tournament.Screens.Drawings.Components
         public GroupTeam(TournamentTeam team, int fontSize = 10)
             : base(team)
         {
-            Width = 36;
+            Width = 120;
             AutoSizeAxes = Axes.Y;
 
             Flag.Anchor = Anchor.TopCentre;

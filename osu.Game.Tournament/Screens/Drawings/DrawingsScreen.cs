@@ -70,63 +70,75 @@ namespace osu.Game.Tournament.Screens.Drawings
                     RelativeSizeAxes = Axes.Both,
                     Children = new Drawable[]
                     {
-                        new Box
+                        new TourneyVideo("drawings")
                         {
-                            Anchor = Anchor.TopCentre,
-                            Origin = Anchor.TopCentre,
+                            Loop = true,
                             RelativeSizeAxes = Axes.Both,
-                            Colour = new Color4(28, 30, 34, 255),
                         },
-                        // Visualiser
-                        new VisualiserContainer
+                        new Container
                         {
-                            Anchor = Anchor.Centre,
-                            Origin = Anchor.Centre,
+                            RelativeSizeAxes = Axes.Both,
+                            Children = new Drawable[]
+                            {
+                                // Visualiser
+                                new VisualiserContainer
+                                {
+                                    Anchor = Anchor.Centre,
+                                    Origin = Anchor.Centre,
 
-                            RelativeSizeAxes = Axes.X,
-                            Size = new Vector2(1, 10),
+                                    RelativeSizeAxes = Axes.X,
+                                    Size = new Vector2(1, 10),
 
-                            Colour = new Color4(255, 204, 34, 255),
+                                    Colour = new Color4(255, 204, 34, 255),
 
-                            Lines = 6
+                                    Lines = 6,
+                                },
+
+                                // Scrolling teams
+                                teamsContainer = new ScrollingTeamContainer
+                                {
+                                    Anchor = Anchor.Centre,
+                                    Origin = Anchor.Centre,
+
+                                    RelativeSizeAxes = Axes.X,
+                                },
+
+                                // Scrolling team name
+                                fullTeamNameText = new TournamentSpriteText
+                                {
+                                    Anchor = Anchor.Centre,
+                                    Origin = Anchor.TopCentre,
+
+                                    Position = new Vector2(0, 45f),
+
+                                    Colour = OsuColour.Gray(0.95f),
+
+                                    Alpha = 0,
+
+                                    Font = OsuFont.Torus.With(weight: FontWeight.Light, size: 42),
+                                }
+                            },
+                            
+                            Padding = new MarginPadding
+                            {
+                                Top = -300f
+                            }
                         },
                         // Groups
                         groupsContainer = new GroupContainer(drawingsConfig.Get<int>(DrawingsConfig.Groups), drawingsConfig.Get<int>(DrawingsConfig.TeamsPerGroup))
                         {
-                            Anchor = Anchor.TopCentre,
-                            Origin = Anchor.TopCentre,
+                            Anchor = Anchor.Centre,
+                            Origin = Anchor.Centre,
 
                             RelativeSizeAxes = Axes.Y,
                             AutoSizeAxes = Axes.X,
 
                             Padding = new MarginPadding
                             {
-                                Top = 35f,
-                                Bottom = 35f
+                                Top = 420f,
+                                Bottom = 120f
                             }
                         },
-                        // Scrolling teams
-                        teamsContainer = new ScrollingTeamContainer
-                        {
-                            Anchor = Anchor.Centre,
-                            Origin = Anchor.Centre,
-
-                            RelativeSizeAxes = Axes.X,
-                        },
-                        // Scrolling team name
-                        fullTeamNameText = new TournamentSpriteText
-                        {
-                            Anchor = Anchor.Centre,
-                            Origin = Anchor.TopCentre,
-
-                            Position = new Vector2(0, 45f),
-
-                            Colour = OsuColour.Gray(0.95f),
-
-                            Alpha = 0,
-
-                            Font = OsuFont.Torus.With(weight: FontWeight.Light, size: 42),
-                        }
                     }
                 },
                 // Control panel container
@@ -168,7 +180,7 @@ namespace osu.Game.Tournament.Screens.Drawings
                         RelativeSizeAxes = Axes.X,
 
                         Text = "Top seed",
-                        Action = () => 
+                        Action = () =>
                         {
                             changeQualSeed(new Bindable<string>("Top"));
                             reloadTeams();
@@ -180,7 +192,7 @@ namespace osu.Game.Tournament.Screens.Drawings
                         RelativeSizeAxes = Axes.X,
 
                         Text = "High seed",
-                        Action = () => 
+                        Action = () =>
                         {
                             changeQualSeed(new Bindable<string>("High"));
                             reloadTeams();
@@ -192,7 +204,7 @@ namespace osu.Game.Tournament.Screens.Drawings
                         RelativeSizeAxes = Axes.X,
 
                         Text = "Mid seed",
-                        Action = () => 
+                        Action = () =>
                         {
                             changeQualSeed(new Bindable<string>("Mid"));
                             reloadTeams();
@@ -204,7 +216,7 @@ namespace osu.Game.Tournament.Screens.Drawings
                         RelativeSizeAxes = Axes.X,
 
                         Text = "Low seed",
-                        Action = () => 
+                        Action = () =>
                         {
                             changeQualSeed(new Bindable<string>("Low"));
                             reloadTeams();
