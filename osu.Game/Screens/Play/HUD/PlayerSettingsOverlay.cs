@@ -77,7 +77,8 @@ namespace osu.Game.Screens.Play.HUD
                 Origin = Anchor.TopRight,
                 Anchor = Anchor.TopLeft,
                 Margin = new MarginPadding(5),
-                Action = () => Expanded.Toggle()
+                Action = () => Expanded.Toggle(),
+                Alpha = 0f
             });
 
             AddInternal(new Box

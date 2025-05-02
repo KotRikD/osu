@@ -71,6 +71,7 @@ using osu.Game.Screens.Play;
 using osu.Game.Screens.Ranking;
 using osu.Game.Screens.Select;
 using osu.Game.Screens.Select.Leaderboards;
+using osu.Game.Screens.OnlinePlay.Multiplayer.Spectate;
 using osu.Game.Seasonal;
 using osu.Game.Skinning;
 using osu.Game.Updater;
@@ -1682,6 +1683,12 @@ namespace osu.Game
                 }
 
                 skinEditor.SetTarget((OsuScreen)newScreen);
+            }
+
+            switch (newScreen) {
+                case MultiSpectatorScreen mpSpecScreen:
+                    BackButton.Hide();
+                    break;
             }
         }
 

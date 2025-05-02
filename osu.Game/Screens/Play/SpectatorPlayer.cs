@@ -2,6 +2,7 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using osu.Framework.Allocation;
+using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Extensions.ObjectExtensions;
 using osu.Framework.Graphics;
 using osu.Framework.Screens;
@@ -44,11 +45,13 @@ namespace osu.Game.Screens.Play
         {
             AddInternal(new OsuSpriteText
             {
-                Text = $"Watching {score.ScoreInfo.User.Username} playing live!",
-                Font = OsuFont.Default.With(size: 30),
-                Y = 100,
-                Anchor = Anchor.TopCentre,
-                Origin = Anchor.TopCentre,
+                Text = $"{score.ScoreInfo.User.Username}",
+                Font = OsuFont.Default.With(size: 64, italics: true, weight: FontWeight.Black),
+                Y = 0,
+                Padding = new MarginPadding(15),
+                Colour = Color4Extensions.FromHex(@"ffcc22"),
+                Anchor = Anchor.BottomRight,
+                Origin = Anchor.BottomRight,
             });
         }
 

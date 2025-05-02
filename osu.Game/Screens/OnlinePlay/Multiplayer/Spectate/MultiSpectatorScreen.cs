@@ -134,31 +134,6 @@ namespace osu.Game.Screens.OnlinePlay.Multiplayer.Spectate
 
             for (int i = 0; i < Users.Count; i++)
                 grid.Add(instances[i] = new PlayerArea(Users[i], syncManager.CreateManagedClock()));
-
-            LoadComponentAsync(leaderboardProvider, _ =>
-            {
-                AddInternal(leaderboardProvider);
-                foreach (var instance in instances)
-                    leaderboardProvider.AddClock(instance.UserId, instance.SpectatorPlayerClock);
-
-                if (leaderboardProvider.TeamScores.Count == 2)
-                {
-                    LoadComponentAsync(new MatchScoreDisplay
-                    {
-                        Team1Score = { BindTarget = leaderboardProvider.TeamScores.First().Value },
-                        Team2Score = { BindTarget = leaderboardProvider.TeamScores.Last().Value },
-                    }, scoreDisplayContainer.Add);
-                }
-            });
-            leaderboardFlow.Insert(0, new DrawableGameplayLeaderboard
-            {
-                Expanded = { Value = true }
-            });
-
-            LoadComponentAsync(new GameplayChatDisplay(room)
-            {
-                Expanded = { Value = true },
-            }, chat => leaderboardFlow.Insert(1, chat));
         }
 
         protected override void LoadComplete()

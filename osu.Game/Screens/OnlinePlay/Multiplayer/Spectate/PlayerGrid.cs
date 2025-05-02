@@ -24,7 +24,7 @@ namespace osu.Game.Screens.OnlinePlay.Multiplayer.Spectate
         /// </summary>
         public const int MAX_PLAYERS = 16;
 
-        private const float player_spacing = 6;
+        private const float player_spacing = -1;
 
         /// <summary>
         /// The currently-maximised facade.
