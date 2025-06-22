@@ -67,7 +67,7 @@ namespace osu.Game.Tournament.Screens.Drawings.Components
                         {
                             Anchor = Anchor.Centre,
                             Origin = Anchor.BottomCentre,
-                            Size = new Vector2(2, 55),
+                            Size = new Vector2(2, 90),
 
                             Colour = ColourInfo.GradientVertical(Color4.Transparent, Color4.White)
                         },
@@ -75,7 +75,7 @@ namespace osu.Game.Tournament.Screens.Drawings.Components
                         {
                             Anchor = Anchor.Centre,
                             Origin = Anchor.TopCentre,
-                            Size = new Vector2(2, 55),
+                            Size = new Vector2(2, 90),
 
                             Colour = ColourInfo.GradientVertical(Color4.White, Color4.Transparent)
                         }
@@ -312,7 +312,8 @@ namespace osu.Game.Tournament.Screens.Drawings.Components
             public new TournamentTeam Team => base.Team.AsNonNull();
 
             public const float WIDTH = 58;
-            public const float HEIGHT = 44;
+
+            public const float HEIGHT = 75;
 
             private readonly Box outline;
 

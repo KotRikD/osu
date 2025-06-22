@@ -39,15 +39,15 @@ namespace osu.Game.Tournament.Screens.Drawings.Components
 
                     Spacing = new Vector2(7f, 0)
                 },
-                bottomGroups = new FillFlowContainer<Group>
-                {
-                    Anchor = Anchor.BottomCentre,
-                    Origin = Anchor.BottomCentre,
+                // bottomGroups = new FillFlowContainer<Group>
+                // {
+                //     Anchor = Anchor.BottomCentre,
+                //     Origin = Anchor.BottomCentre,
 
-                    AutoSizeAxes = Axes.Both,
+                //     AutoSizeAxes = Axes.Both,
 
-                    Spacing = new Vector2(7f, 0)
-                }
+                //     Spacing = new Vector2(7f, 0)
+                // }
             };
 
             for (int i = 0; i < numGroups; i++)
@@ -57,10 +57,11 @@ namespace osu.Game.Tournament.Screens.Drawings.Components
                 groups.Add(g);
                 nextGroupName++;
 
-                if (i < (int)MathF.Ceiling(numGroups / 2f))
-                    topGroups.Add(g);
-                else
-                    bottomGroups.Add(g);
+                topGroups.Add(g);
+                // if (i < (int)MathF.Ceiling(numGroups / 2f))
+                //     topGroups.Add(g);
+                // else
+                //     bottomGroups.Add(g);
             }
         }
 

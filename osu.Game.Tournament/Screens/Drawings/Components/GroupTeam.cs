@@ -14,10 +14,10 @@ namespace osu.Game.Tournament.Screens.Drawings.Components
     {
         private readonly FillFlowContainer innerContainer;
 
-        public GroupTeam(TournamentTeam team)
+        public GroupTeam(TournamentTeam team, int fontSize = 10)
             : base(team)
         {
-            Width = 36;
+            Width = 120;
             AutoSizeAxes = Axes.Y;
 
             Flag.Anchor = Anchor.TopCentre;
@@ -26,7 +26,7 @@ namespace osu.Game.Tournament.Screens.Drawings.Components
             AcronymText.Anchor = Anchor.TopCentre;
             AcronymText.Origin = Anchor.TopCentre;
             AcronymText.Text = team.Acronym.Value.ToUpperInvariant();
-            AcronymText.Font = OsuFont.Torus.With(weight: FontWeight.Bold, size: 10);
+            AcronymText.Font = OsuFont.Torus.With(weight: FontWeight.Bold, size: fontSize);
             Flag.Scale = new Vector2(0.48f);
 
             InternalChildren = new Drawable[]
